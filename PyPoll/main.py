@@ -12,6 +12,7 @@ def __main__():
         poll_data = list(csv.reader(csvfile, delimiter=','))
 
     # hold candidate votes in a dict
+    candidates = []
     candidate_votes = {}
     total_votes = len(poll_data) - 1
     winner = ''
@@ -27,6 +28,7 @@ def __main__():
 
     # add in percent, percentage to candidate votes dictionary
     for k,v in candidate_votes.items():
+        candidates.append(k)
         # index into the votes num
         vote_percent = round((v[0][1]/total_votes)*100,2)
         candidate_votes[k] += [['percent', vote_percent]]
@@ -43,17 +45,17 @@ def __main__():
             '--------------------------\n' +
             'Total Votes: {}\n' +
             '--------------------------\n' +
-            'Khan: {}% ({})\n' +
-            'Correy: {}% ({})\n' +
-            'Li: {}% ({}))\n' +
-            'O\'Tooley: {}% ({})\n' +
+            '{}: {}% ({})\n' +
+            '{}: {}% ({})\n' +
+            '{}: {}% ({}))\n' +
+            '{}: {}% ({})\n' +
             '--------------------------\n' +
             'Winner: {}\n' +
             '--------------------------')
-            .format(total_votes, candidate_votes['Khan'][1][1], candidate_votes['Khan'][0][1],
-            candidate_votes['Correy'][1][1],candidate_votes['Correy'][0][1],
-            candidate_votes['Li'][1][1],candidate_votes['Li'][0][1],
-            candidate_votes['O\'Tooley'][1][1],candidate_votes['O\'Tooley'][0][1],
+            .format(total_votes, candidates[0],candidate_votes[candidates[0]][1][1], candidate_votes[candidates[0]][0][1],
+            candidates[1], candidate_votes[candidates[1]][1][1],candidate_votes[candidates[1]][0][1],
+            candidates[2], candidate_votes[candidates[2]][1][1],candidate_votes[candidates[2]][0][1],
+            candidates[3], candidate_votes[candidates[3]][1][1],candidate_votes[candidates[3]][0][1],
             winner))
 
         return message
